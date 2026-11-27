@@ -5,10 +5,23 @@ Provides dictionary-driven multi-language translation support with fallback cach
 
 import json
 import os
+import sys
 from typing import Dict, List, Optional
 from core.logger import log_debug
 
-LOCALES_DIR = os.path.join(os.path.dirname(__file__), "..", "locales")
+def _get_locales_dir() -> str:
+    """Find locales directory whether running from source or frozen in PyInstaller."""
+    if getattr(sys, 'frozen', False):
+        base = getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
+        p = os.path.join(base, "locales")
+        if os.path.isdir(p):
+            return p
+        p_exe = os.path.join(os.path.dirname(sys.executable), "locales")
+        if os.path.isdir(p_exe):
+            return p_exe
+    return os.path.join(os.path.dirname(__file__), "..", "locales")
+
+LOCALES_DIR = _get_locales_dir()
 
 SUPPORTED_LANGUAGES: Dict[str, str] = {
     "en": "English",

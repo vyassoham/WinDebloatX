@@ -72,7 +72,13 @@ class WinDebloatXApp(ctk.CTk):
         self.minsize(1000, 680)
 
         # Apply icon if present
-        icon_path = os.path.join(os.path.dirname(__file__), "..", "assets", "icon.ico")
+        if getattr(sys, 'frozen', False):
+            base_dir = getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
+            icon_path = os.path.join(base_dir, "assets", "icon.ico")
+            if not os.path.isfile(icon_path):
+                icon_path = os.path.join(os.path.dirname(sys.executable), "assets", "icon.ico")
+        else:
+            icon_path = os.path.join(os.path.dirname(__file__), "..", "assets", "icon.ico")
         if os.path.isfile(icon_path):
             try:
                 self.iconbitmap(icon_path)

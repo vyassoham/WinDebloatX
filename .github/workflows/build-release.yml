@@ -30,19 +30,11 @@ jobs:
 
       - name: Run Test Suite
         run: |
-          pytest tests/
+          python -m pytest tests/
 
       - name: Compile Standalone Executable
         run: |
-          pyinstaller --noconfirm --onedir --windowed --uac-admin `
-            --name "WinDebloatX" `
-            --icon "assets/icon.ico" `
-            --add-data "locales;locales" `
-            --add-data "assets;assets" `
-            --collect-all customtkinter `
-            --hidden-import "rich" `
-            --hidden-import "PIL" `
-            main.py
+          pyinstaller --noconfirm --onedir --windowed --uac-admin --name "WinDebloatX" --icon "assets/icon.ico" --add-data "locales;locales" --add-data "assets;assets" --collect-all customtkinter --hidden-import "rich" --hidden-import "PIL" main.py
 
       - name: Create Portable Zip & Compute SHA-256 Checksum
         run: |
@@ -54,6 +46,8 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
             dist/WinDebloatX-Portable.zip
