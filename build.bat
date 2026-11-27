@@ -2,7 +2,7 @@
 title WinDebloatX Standalone Compiler
 echo Building standalone executable with PyInstaller...
 
-pip install pyinstaller customtkinter rich pillow darkdetect pytest
+pip install pyinstaller customtkinter rich pillow darkdetect psutil pytest
 
 pyinstaller --noconfirm --onedir --windowed --uac-admin ^
     --name "WinDebloatX" ^
@@ -12,6 +12,7 @@ pyinstaller --noconfirm --onedir --windowed --uac-admin ^
     --collect-all customtkinter ^
     --hidden-import "rich" ^
     --hidden-import "PIL" ^
+    --hidden-import "psutil" ^
     main.py
 
 echo.

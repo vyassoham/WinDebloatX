@@ -34,7 +34,7 @@ jobs:
 
       - name: Compile Standalone Executable
         run: |
-          pyinstaller --noconfirm --onedir --windowed --uac-admin --name "WinDebloatX" --icon "assets/icon.ico" --add-data "locales;locales" --add-data "assets;assets" --collect-all customtkinter --hidden-import "rich" --hidden-import "PIL" main.py
+          pyinstaller --noconfirm --onedir --windowed --uac-admin --name "WinDebloatX" --icon "assets/icon.ico" --add-data "locales;locales" --add-data "assets;assets" --collect-all customtkinter --hidden-import "rich" --hidden-import "PIL" --hidden-import "psutil" main.py
 
       - name: Create Portable Zip & Compute SHA-256 Checksum
         run: |

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="windebloatx",
-    version="2.0.0",
+    version="2.3.0",
     author="vyassoham",
     url="https://github.com/vyassoham/WinDebloatX",
     description="Modern Windows 10 & 11 system optimizer, privacy hardener, and debloater",
@@ -15,6 +15,7 @@ setup(
         "rich>=13.0.0",
         "pillow>=10.0.0",
         "darkdetect>=0.8.0",
+        "psutil>=5.9.0",
     ],
     entry_points={
         "console_scripts": [
